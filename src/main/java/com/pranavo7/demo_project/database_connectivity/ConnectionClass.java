@@ -17,11 +17,11 @@ import java.util.logging.Logger;
  */
 public class ConnectionClass {
     private static ConnectionClass single_instance = null;
-    Connection connection;
+    public Connection connection;
 
     private ConnectionClass() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/smartcity", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/demoproject", "root", "");
             if (connection != null) {
                 System.out.println("connected");
 
@@ -30,8 +30,7 @@ public class ConnectionClass {
                         + "email VARCHAR(255), "
                         + "password VARCHAR(255), "
                         + "address VARCHAR(255), "
-                        + "dob VARCHAR(255), "
-                        + "tob VARCHAR(255), "
+                        + "role INT, "
                         + "PRIMARY KEY(id))";
                 PreparedStatement preparedStatement = connection.prepareStatement(statement);
                 preparedStatement.execute();

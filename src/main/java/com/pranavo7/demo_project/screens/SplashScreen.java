@@ -18,12 +18,7 @@ public class SplashScreen extends javax.swing.JFrame {
      */
     public SplashScreen() {
         initComponents();
-        //ConnectionClass.getInstance();
-    }
-    
-     void showProgress() {
-        
-                     
+        ConnectionClass.getInstance();
     }
 
     /**
@@ -40,6 +35,7 @@ public class SplashScreen extends javax.swing.JFrame {
         loginLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(null);
         getContentPane().add(progressBar);
         progressBar.setBounds(80, 130, 240, 40);
@@ -53,6 +49,7 @@ public class SplashScreen extends javax.swing.JFrame {
         loginLabel1.setBounds(180, 40, 31, 17);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -101,8 +98,10 @@ public class SplashScreen extends javax.swing.JFrame {
                    sc.progressLabel.setText("Almost there....");
                 }
                 if(i==100){
-                    LoginScreen login=new LoginScreen();
-                     login.setVisible(true);
+                    AddAdmin addAdmin=new AddAdmin();
+                    addAdmin.setVisible(true);
+//                    ViewUsers viewUsers = new ViewUsers();
+//                    viewUsers.setVisible(true);
                     sc.dispose();
                 }
             }

@@ -27,6 +27,7 @@ public class LoginScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(null);
 
         pack();
