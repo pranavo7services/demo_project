@@ -98,10 +98,12 @@ public class SplashScreen extends javax.swing.JFrame {
                    sc.progressLabel.setText("Almost there....");
                 }
                 if(i==100){
-                    AddAdmin addAdmin=new AddAdmin();
-                    addAdmin.setVisible(true);
-//                    ViewUsers viewUsers = new ViewUsers();
-//                    viewUsers.setVisible(true);
+//                    AddAdmin addAdmin=new AddAdmin();
+//                    addAdmin.setVisible(true);
+                    ViewUsers viewUsers = new ViewUsers();
+                    viewUsers.setVisible(true);
+//                    LoginScreen loginScreen = new LoginScreen();
+//                    loginScreen.setVisible(true);
                     sc.dispose();
                 }
             }

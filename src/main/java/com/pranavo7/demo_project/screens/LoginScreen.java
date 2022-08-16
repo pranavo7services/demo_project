@@ -4,6 +4,15 @@
  */
 package com.pranavo7.demo_project.screens;
 
+import com.pranavo7.demo_project.database_connectivity.ConnectionClass;
+import com.pranavo7.demo_project.models.UserModel;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author macbookpro2014
@@ -26,12 +35,88 @@ public class LoginScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        titleLabel = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
+        emailTF = new javax.swing.JTextField();
+        passwordLabel = new javax.swing.JLabel();
+        passwordTF = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(null);
 
+        jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(160, 200, 72, 23);
+
+        titleLabel.setText("Login");
+        getContentPane().add(titleLabel);
+        titleLabel.setBounds(160, 40, 31, 17);
+
+        emailLabel.setText("Email");
+        getContentPane().add(emailLabel);
+        emailLabel.setBounds(50, 100, 32, 17);
+        getContentPane().add(emailTF);
+        emailTF.setBounds(180, 100, 130, 23);
+
+        passwordLabel.setText("Password");
+        getContentPane().add(passwordLabel);
+        passwordLabel.setBounds(50, 150, 70, 17);
+        getContentPane().add(passwordTF);
+        passwordTF.setBounds(180, 147, 130, 23);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        final String username = emailTF.getText();
+        final String password = passwordTF.getText();
+        if (username.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Enter username");
+        } else if (password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Enter password");
+        } else {
+            String statement = "SELECT * from users where email=? and password=?";
+            PreparedStatement preparedStatement;
+            try {
+                preparedStatement = ConnectionClass.getInstance().connection.prepareStatement(statement);
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, password);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    System.out.println("in result set next while");
+                    UserModel userModel = new UserModel();
+                    userModel.setID(Integer.parseInt(resultSet.getString("id")));
+                    userModel.setName(resultSet.getString("name"));
+                    userModel.setEmail(resultSet.getString("email"));
+                    userModel.setAddress(resultSet.getString("address"));
+                    userModel.setRole(resultSet.getInt("role"));
+                    System.out.println("in result set next role " + userModel.getRole());
+
+                    if (userModel.getRole() == 0) {
+                        
+                    } else if (userModel.getRole() == 1) {
+
+                    } else if (userModel.getRole() == 2) {
+                        
+                    }
+                    JOptionPane.showMessageDialog(null, "user found");
+                    return;
+                }
+                JOptionPane.showMessageDialog(null, "Invalid username or password");
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -69,5 +154,11 @@ public class LoginScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JTextField emailTF;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel passwordLabel;
+    private javax.swing.JTextField passwordTF;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
