@@ -82,7 +82,7 @@ public class LoginScreen extends javax.swing.JFrame {
         } else if (password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Enter password");
         } else {
-            String statement = "SELECT * from users where email=? and password=?";
+            final String statement = "SELECT * from users where email=? and password=?";
             PreparedStatement preparedStatement;
             try {
                 preparedStatement = ConnectionClass.getInstance().connection.prepareStatement(statement);
@@ -101,11 +101,11 @@ public class LoginScreen extends javax.swing.JFrame {
                     userModel.setRole(resultSet.getInt("role"));
                     System.out.println("in result set next role " + userModel.getRole());
 
-                    if (userModel.getRole() == 0) {
+                    if (userModel.getRole() == 1) {
                         
-                    } else if (userModel.getRole() == 1) {
-
                     } else if (userModel.getRole() == 2) {
+
+                    } else if (userModel.getRole() == 3) {
                         
                     }
                     JOptionPane.showMessageDialog(null, "user found");
